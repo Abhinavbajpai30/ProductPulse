@@ -117,5 +117,3 @@ const config = {
 ---
 
 **Product Managers:** Try our live demo with sample App IDs to instantly uncover user insights! 🚀
-
-*Note: Current version processes Google Play reviews. Twitter integration coming in Q4 2024.*
