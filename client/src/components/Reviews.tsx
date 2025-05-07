@@ -22,13 +22,17 @@ function Reviews() {
         })} */}
 
         {appDetails && <div>
-                <img
-                src={appDetails.icon}
-                alt={appDetails.title + " Logo"}
-                className='mx-auto my-4 w-18 h-18 object-contain rounded-lg shadow-md'
-                />
-                <h2 className='mx-auto text-4xl font-extrabold text-gray-800 leading-tight mb-2'>{appDetails.title}</h2>
-                <p className='mx-auto text-gray-600 italic mb-5'>{appDetails.summary}</p>
+                <div className='flex'>
+                    <img
+                    src={appDetails.icon}
+                    alt={appDetails.title + " Logo"}
+                    className='inline-block my-4 w-18 h-18 object-contain rounded-lg shadow-md'
+                    />
+                    <div className='inline-block my-4 mx-3 w-80'>
+                        <h2 className='text-3xl font-extrabold text-gray-800 leading-tight mb-2'>{appDetails.title}</h2>
+                        <p className='text-gray-600 italic mb-5' dangerouslySetInnerHTML={{ __html: appDetails.summary}}></p>
+                    </div>
+                </div>
             </div>}
 
         {jsonData && isLoading && <div>
