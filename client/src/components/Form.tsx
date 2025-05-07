@@ -82,7 +82,7 @@ function Form() {
     Also, provide a summary of what users are saying and what PMs (product managers) should prioritize.
     `
 
-    console.log("prompt:", prompt);
+    // console.log("prompt:", prompt);
 
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-preview-04-17",
@@ -112,7 +112,7 @@ function Form() {
     fetch(`https://product-pulse-two.vercel.app/api/reviews?appId=${appId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
 
         setError("");
         setJsonData(data.reviews)
@@ -122,7 +122,7 @@ function Form() {
       fetch(`https://product-pulse-two.vercel.app/api/app?appId=${appId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if(!('error' in data)) {
           setAppDetails(data);
         }
