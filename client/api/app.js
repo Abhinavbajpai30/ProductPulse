@@ -1,6 +1,10 @@
-import gplay from 'google-play-scraper';
+import gplay from "google-play-scraper";
 
 export default async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "https://propacity.abhinavbajpai.com");
+  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
   const { appId, lang = "en", country = "us" } = req.query;
 
   if (!appId) {
@@ -21,6 +25,8 @@ export default async function handler(req, res) {
     });
   } catch (error) {
     console.error("Failed to scrape app details:", error);
-    res.status(500).json({ error: "Failed to scrape app details from Google Play." });
+    res
+      .status(500)
+      .json({ error: "Failed to scrape app details from Google Play." });
   }
 }
