@@ -1,7 +1,5 @@
 # Product Pulse: AI-Powered Feedback Analyzer
 
-![Demo Screenshot](screenshot-placeholder.png) *Add your screenshot here*
-
 ## Overview 📊
 Product Pulse is an AI-driven tool that automatically analyzes user feedback from app stores and social media. Designed for product teams, it delivers weekly summaries of user sentiment, helping PMs identify critical issues and prioritize improvements using Google's Gemini AI.
 
