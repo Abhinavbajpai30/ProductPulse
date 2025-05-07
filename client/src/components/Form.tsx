@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { MainContext } from "../App";
 import { GoogleGenAI, Type } from "@google/genai";
 
@@ -6,12 +6,8 @@ function Form() {
   const context = useContext(MainContext);
   if (!context) return null;
 
-  // const inputFileRef = context?.inputFileRef;
   const inputTextRef = context.inputTextRef;
-  // const jsonData = context.jsonData;
   const setJsonData = context.setJsonData;
-  // const fileName = context.fileName;
-  // const setFileName = context.setFileName;
   const setError = context.setError;
   const setResponse = context.setResponse;
   const isLoading = context.isLoading;
@@ -133,88 +129,11 @@ function Form() {
       })
   };
 
-  // const handleButtonClick = () => {
-  //   if (inputFileRef.current) {
-  //     inputFileRef.current.click();
-  //   }
-  // };
-
-  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const files = event.target.files;
-
-  //   setFileName("");
-  //   setJsonData(null);
-  //   setError("");
-
-  //   if (!files) {
-  //     return;
-  //   }
-  //   const file = files[0];
-  //   if (!file) {
-  //     setError("No file selected.");
-  //     return;
-  //   }
-
-  //   if (file.type !== "application/json") {
-  //     setError(`Invalid file type: ${file.type}. Please upload a JSON file.`);
-  //     if (inputFileRef.current) {
-  //       inputFileRef.current.value = "";
-  //     }
-  //     return;
-  //   }
-
-  //   setFileName(file.name);
-
-  //   const reader = new FileReader();
-
-  //   reader.onload = (e) => {
-  //     try {
-  //       console.log(e.target.result);
-  //       const content = e.target.result;
-  //       const parsedJson = JSON.parse(content);
-  //       setJsonData(parsedJson);
-  //     } catch (err) {
-  //       console.error("Error reading JSON:", err);
-  //       if (err instanceof Error) {
-  //         setError(`Error parsing JSON: ${err.message}`);
-  //       } else {
-  //         setError("Error parsing JSON: Unknown error occurred.");
-  //       }
-  //     }
-  //   };
-
-  //   reader.readAsText(file);
-  //   if (inputFileRef.current) {
-  //     inputFileRef.current.value = "";
-  //   }
-
-  //   console.log(file);
-  // };
-
   return (
     <>
       <h2 className="text-2xl font-semibold mb-4 text-gray-700 text-center">
         Play Store Review Analyzer
       </h2>
-      {/* <input
-        type="file"
-        accept=".json,application/json"
-        onChange={handleFileChange}
-        ref={inputFileRef}
-        className="hidden"
-        id="jsonFile"
-      />
-
-      <button
-        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mb-1.5"
-        onClick={handleButtonClick}
-      >
-        Choose JSON File
-      </button>
-
-      <h3 className="text-1xl font-semibold mb-4 text-gray-700 text-center my-1.5">
-        OR
-      </h3> */}
 
       <div className="mt-6">
         <input
@@ -231,14 +150,6 @@ function Form() {
           Search
         </button>
       </div>
-
-      {/* {fileName && (
-        <p className="mt-3 text-sm text-gray-600 truncate">
-          Selected File: {fileName}
-        </p>
-      )} */}
-
-    {/* {isLoading && <h3 className="text-1xl font-semibold mb-4 text-gray-700 text-center my-1.5">Please wait...</h3>} */}
     </>
   );
 }

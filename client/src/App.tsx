@@ -21,6 +21,7 @@ interface MainContextType {
   setAppDetails: React.Dispatch<React.SetStateAction<{title: string, summary: string, icon: string} | null>>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const MainContext = createContext<MainContextType>({} as MainContextType);
 
 function App() {
@@ -34,15 +35,6 @@ function App() {
   const [appDetails, setAppDetails] = useState<{title: string, summary: string, icon: string} | null>(null);
 
   const sampleAppIds = ["com.instagram.android", "com.ludo.king", "com.whatsapp", "com.application.zomato", "com.netflix.mediaclient", "com.duolingo", "com.truecaller", "com.pinterest", "in.startv.hotstar"]
-
-  // useEffect(() => {
-  //   fetch('http://127.0.0.1:3000/api?appId=com.google.android.apps.maps').then((res) => {
-  //     // console.log(res);
-  //     return res.json();
-  //   })
-  //   .then((data) => setJsonData(data.reviews));
-  // }, [])
-  
 
   return (
     <div className='flex items-center justify-center min-h-screen bg-gray-100 font-sans'>
