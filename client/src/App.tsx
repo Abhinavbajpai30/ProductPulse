@@ -39,6 +39,7 @@ function App() {
   return (
     <div className='flex items-center justify-center min-h-screen bg-gray-100 font-sans'>
       <div className='bg-white p-6 md:p-8 rounded-lg shadow-md w-full max-w-lg mx-4'>
+        <img className="mx-auto my-4 w-40 object-contain rounded-lg" src="/logoMain.png"/>
         <MainContext.Provider value={{jsonData, setJsonData, inputTextRef, inputFileRef, fileName, setFileName, error, setError, response, setResponse, isLoading, setIsLoading, sampleAppIds, appDetails, setAppDetails}}>
           <Form />
           <Reviews />
