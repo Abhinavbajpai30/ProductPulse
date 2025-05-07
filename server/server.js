@@ -6,7 +6,7 @@ const port = 3000;
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // or use '*' to allow all (not recommended for production)
+    origin: "http://localhost:5173",
   })
 );
 
@@ -24,7 +24,6 @@ app.get("/api/reviews", async (req, res) => {
       country: country,
       num: parseInt(num, 50),
     });
-    // console.log("Sending reviews data for:", appId);
     res.json({reviews: reviews.data});
   } catch (error) {
     console.error("Failed to scrape reviews:", error);
