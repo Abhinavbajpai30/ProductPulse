@@ -109,7 +109,7 @@ function Form() {
         return;
     }
 
-    fetch(`http://127.0.0.1:3000/api/reviews?appId=${appId}`)
+    fetch(`https://product-pulse-two.vercel.app/api/reviews?appId=${appId}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -119,7 +119,7 @@ function Form() {
         fetchResponse(data.reviews);
       });
     
-      fetch(`http://127.0.0.1:3000/api/app?appId=${appId}`)
+      fetch(`https://product-pulse-two.vercel.app/api/app?appId=${appId}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
