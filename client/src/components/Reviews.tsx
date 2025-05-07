@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {MainContext} from '../App';
 
 function Reviews() {
@@ -40,21 +40,21 @@ function Reviews() {
                 </ul>
             </div>}
 
-        {response && <><h4 className='text-2xl font-bold mb-5 text-gray-700 border-b-2 border-blue-500 pb-2 inline-block mt-6'>Key Pain Points</h4>
+        {response && <><h4 className='text-2xl font-bold mb-5 text-gray-700 border-b-2 border-blue-500 pb-2 inline-block mt-6'>🔴 Key Pain Points</h4>
         <ul className='list-disc list-inside space-y-3 text-gray-700'>
             {response["Key pain points"].map((data, index) => {
                 return <li key={index}>{data}</li>
             })}
         </ul>
 
-        <h4 className='text-2xl font-bold mb-5 text-gray-700 border-b-2 border-blue-500 pb-2 inline-block mt-6'>Requests</h4>
+        <h4 className='text-2xl font-bold mb-5 text-gray-700 border-b-2 border-blue-500 pb-2 inline-block mt-6'>🔵 Requests</h4>
         <ul className='list-disc list-inside space-y-3 text-gray-700'>
             {response["Requests"].map((data, index) => {
                 return <li key={index}>{data}</li>
             })}
         </ul>
 
-        <h4 className='text-2xl font-bold mb-5 text-gray-700 border-b-2 border-blue-500 pb-2 inline-block mt-6'>Positive Feedback</h4>
+        <h4 className='text-2xl font-bold mb-5 text-gray-700 border-b-2 border-blue-500 pb-2 inline-block mt-6'>🟢 Positive Feedback</h4>
         <ul className='list-disc list-inside space-y-3 text-gray-700'>
             {response["Positive Feedback"].map((data, index) => {
                 return <li key={index}>{data}</li>

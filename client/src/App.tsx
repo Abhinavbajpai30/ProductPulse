@@ -1,18 +1,37 @@
-import { useState, useRef, useEffect, createContext } from 'react';
+import { useState, useRef, createContext } from 'react';
 import Reviews from './components/Reviews';
 import Form from './components/Form';
 import './App.css';
 
-export const MainContext = createContext(null);
+interface MainContextType {
+  jsonData: {text: string}[] | null;
+  setJsonData: React.Dispatch<React.SetStateAction<{text: string}[] | null>>;
+  inputTextRef: React.RefObject<HTMLInputElement | null>;
+  inputFileRef: React.RefObject<HTMLInputElement | null>;
+  fileName: string;
+  setFileName: React.Dispatch<React.SetStateAction<string>>;
+  error: string;
+  setError: React.Dispatch<React.SetStateAction<string>>;
+  response: {"Key pain points": string[], "Requests": string[], "Positive Feedback": string[], "Summary of users": string, "PMs prioritize": string[]} | null;
+  setResponse: React.Dispatch<React.SetStateAction<{"Key pain points": string[], "Requests": string[], "Positive Feedback": string[], "Summary of users": string, "PMs prioritize": string[]} | null>>;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  sampleAppIds: string[];
+  appDetails: {title: string, summary: string, icon: string} | null;
+  setAppDetails: React.Dispatch<React.SetStateAction<{title: string, summary: string, icon: string} | null>>;
+}
+
+export const MainContext = createContext<MainContextType>({} as MainContextType);
+
 function App() {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const inputTextRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string>('');
-  const [jsonData, setJsonData] = useState<object[] | null>(null);
+  const [jsonData, setJsonData] = useState<{text: string}[] | null>(null);
   const [error, setError] = useState<string>('');
-  const [response, setResponse] = useState<object | null>(null);
+  const [response, setResponse] = useState<{"Key pain points": string[], "Requests": string[], "Positive Feedback": string[], "Summary of users": string, "PMs prioritize": string[]} | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [appDetails, setAppDetails] = useState(null);
+  const [appDetails, setAppDetails] = useState<{title: string, summary: string, icon: string} | null>(null);
 
   const sampleAppIds = ["com.instagram.android", "com.ludo.king", "com.whatsapp", "com.application.zomato", "com.netflix.mediaclient", "com.duolingo", "com.truecaller", "com.pinterest", "in.startv.hotstar"]
 

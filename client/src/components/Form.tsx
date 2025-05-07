@@ -1,22 +1,23 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { MainContext } from "../App";
 import { GoogleGenAI, Type } from "@google/genai";
 
 function Form() {
   const context = useContext(MainContext);
+  if (!context) return null;
 
   // const inputFileRef = context?.inputFileRef;
-  const inputTextRef = context?.inputTextRef;
-  // const jsonData = context?.jsonData;
-  const setJsonData = context?.setJsonData;
-  // const fileName = context?.fileName;
-  // const setFileName = context?.setFileName;
-  const setError = context?.setError;
-  const setResponse = context?.setResponse;
-  const isLoading = context?.isLoading;
-  const setIsLoading = context?.setIsLoading;
-  const sampleAppIds = context?.sampleAppIds;
-  const setAppDetails = context?.setAppDetails;
+  const inputTextRef = context.inputTextRef;
+  // const jsonData = context.jsonData;
+  const setJsonData = context.setJsonData;
+  // const fileName = context.fileName;
+  // const setFileName = context.setFileName;
+  const setError = context.setError;
+  const setResponse = context.setResponse;
+  const isLoading = context.isLoading;
+  const setIsLoading = context.setIsLoading;
+  const sampleAppIds = context.sampleAppIds;
+  const setAppDetails = context.setAppDetails;
 
   const apiKey = import.meta.env.VITE_GeminiAPI;
   const ai = new GoogleGenAI({ apiKey: apiKey });
@@ -58,10 +59,10 @@ function Form() {
     },
   };
 
-  const fetchResponse = async (data : object[]) => {
+  const fetchResponse = async (data : {text: string}[]) => {
     if(!data || data.length===0) {
         console.log('No reviews data available to fetch!');
-        setError(`No app found with AppID "${inputTextRef.current.value}"`);
+        setError(`No app found with AppID "${inputTextRef.current!.value}"`);
         return;
     }
 
@@ -93,17 +94,21 @@ function Form() {
       config: config
     });
     setIsLoading(false);
-    setResponse(JSON.parse(response.text));
+    if (response.text) {
+      setResponse(JSON.parse(response.text));
+    } else {
+      setError("Response text is undefined.");
+    }
 
-    setJsonData(false);
+    setJsonData(null);
     
     // console.log(response.text);
   };
 
   const handleSubmit = () => {
-    const appId = inputTextRef.current.value;
+    const appId = inputTextRef.current!.value;
     if(!appId) {
-        inputTextRef.current.value = sampleAppIds[Math.floor(Math.random() * sampleAppIds.length)];
+        inputTextRef.current!.value = sampleAppIds[Math.floor(Math.random() * sampleAppIds.length)];
         handleSubmit();
         return;
     }
@@ -113,7 +118,7 @@ function Form() {
       .then((data) => {
         console.log(data);
 
-        setError(null);
+        setError("");
         setJsonData(data.reviews)
         fetchResponse(data.reviews);
       });
