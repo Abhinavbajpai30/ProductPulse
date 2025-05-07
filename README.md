@@ -116,16 +116,6 @@ const config = {
 - [ ] Automated weekly email reports
 - [ ] Multi-language support
 
-## Contributing 🤝
-1. Fork repository
-2. Create feature branch
-3. Commit changes
-4. Push to branch
-5. Open PR
-
-## License 📄
-MIT License
-
 ---
 
 **Product Managers:** Try our live demo with sample App IDs to instantly uncover user insights! 🚀
