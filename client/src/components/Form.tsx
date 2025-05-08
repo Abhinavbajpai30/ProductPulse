@@ -89,7 +89,6 @@ function Form() {
       contents: prompt,
       config: config
     });
-    setIsLoading(false);
     if (response.text) {
       setResponse(JSON.parse(response.text));
     } else {
@@ -97,6 +96,7 @@ function Form() {
     }
 
     setJsonData(null);
+    setIsLoading(false);
     
     // console.log(response.text);
   };
