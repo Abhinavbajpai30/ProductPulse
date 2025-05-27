@@ -3,124 +3,96 @@ import { MainContext } from "../App";
 
 function Reviews() {
   const context = useContext(MainContext);
-  const jsonData = context?.jsonData;
-  const response = context?.response;
-  const error = context?.error;
-  const isLoading = context?.isLoading;
-  const appDetails = context?.appDetails;
+  const { response, error, isLoading, appDetails } = context || {};
+
+  const renderSection = (title: string, data: string[] | undefined, icon: string, color: string) => {
+    if (!data || data.length === 0) return null;
+    return (
+        <div className="bg-white p-6 rounded-lg shadow-md border-l-4" style={{borderColor: color}}>
+            <h4 className="text-xl font-bold mb-4 flex items-center" style={{color: color}}>
+                <span className="mr-3 text-2xl">{icon}</span>
+                {title}
+            </h4>
+            <ul className="space-y-3 text-gray-700">
+                {data.map((item, index) => (
+                    <li key={index} className="flex items-start">
+                        <span className="text-gray-500 mr-2">▪</span>
+                        <span>{item}</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+  };
+
+  const renderSummarySection = (title: string, data: string | undefined, icon: string) => {
+    if (!data) return null;
+    return (
+        <div className="bg-white p-6 rounded-lg shadow-md">
+            <h4 className="text-xl font-bold mb-4 text-gray-700 flex items-center">
+                <span className="mr-3 text-2xl">{icon}</span>
+                {title}
+            </h4>
+            <p className="space-y-3 text-gray-700 leading-relaxed">
+                {data}
+            </p>
+        </div>
+    );
+  }
+
+  const AppCard = () => {
+    if(!appDetails) return null;
+    return (
+      <div className="p-6 bg-gray-50 rounded-xl shadow-inner border border-gray-200 mt-10">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+              <img
+                  src={appDetails.icon}
+                  alt={`${appDetails.title} Logo`}
+                  className="w-28 h-28 object-contain rounded-2xl border-2 border-white shadow-lg flex-shrink-0"
+              />
+              <div className="flex-1 text-center sm:text-left">
+                  <h1 className="text-3xl font-bold text-gray-800 mb-2">{appDetails.title}</h1>
+                  <div className="text-gray-600 text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: appDetails.summary }}></div>
+              </div>
+          </div>
+      </div>
+  )}
+
+  if (error) {
+    return (
+      <div className="mt-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-800 rounded-lg shadow">
+        <p><strong className="font-bold">Search Error:</strong> {error}</p>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (<>
+      <AppCard/>
+      <div className="text-center my-10">
+        <svg className="animate-spin h-10 w-10 text-indigo-600 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <h3 className="text-xl font-semibold text-gray-700 mt-4">Analyzing Reviews...</h3>
+        <p className="text-gray-500">Please wait while we gather the insights.</p>
+      </div>
+    </>);
+  }
 
   return (
-    <div>
-      {error && (
-        <div className="mt-4 p-3 bg-red-100 border-l-4 border-red-500 text-red-700 rounded-md text-sm">
-          <p>
-            <strong className="font-bold">Search Error:</strong> {error}
-          </p>
-        </div>
-      )}
+    <div className="mt-8 space-y-8">
+        <AppCard/>
 
-      {appDetails && (
-        <div className="p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out mb-8">
-          <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
-            <img
-              src={appDetails.icon}
-              alt={`${appDetails.title} Logo`}
-              className="w-24 h-24 object-contain rounded-xl border border-gray-200 shadow-md"
-            />
-            <div className="flex-1 text-center sm:text-left">
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">{appDetails.title}</h1>
-              <p className="text-gray-700 text-base leading-relaxed" dangerouslySetInnerHTML={{ __html: appDetails.summary }}></p>
+        {response && (
+            <div className="space-y-6">
+                {renderSection("Key Pain Points", response["Key pain points"], '🔴', '#EF4444')}
+                {renderSection("Requests", response["Requests"], '🔵', '#3B82F6')}
+                {renderSection("Positive Feedback", response["Positive Feedback"], '🟢', '#22C55E')}
+                {renderSummarySection("Summary of Users", response["Summary of users"], '📊')}
+                {renderSection("What PMs should prioritize", response["PMs prioritize"], '🎯', '#8B5CF6')}
             </div>
-          </div>
-        </div>
-      )}
-
-      {isLoading || appDetails || jsonData ? <div className="p-4 bg-gray-50 rounded-xl shadow-md">
-      {isLoading && (
-        <div>
-          <div className="text-center mb-6">
-            <h3 className="text-2xl font-semibold text-indigo-600 mb-2">Analyzing Reviews</h3>
-            <p className="text-gray-600">Please wait while we gather the insights...</p>
-            <div className="mt-4">
-              <svg className="animate-spin h-8 w-8 text-indigo-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              _
-            </div>
-          </div>
-
-          {jsonData && jsonData.length > 0 && (
-            <div>
-              <h4 className="text-lg font-medium text-gray-800 mb-3 border-b pb-2">
-                Processing the following reviews:
-              </h4>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm pl-4">
-                {jsonData.map((review, index) => (
-                  <li key={index} className="py-1">
-                    {review.text}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {jsonData && jsonData.length === 0 && isLoading && (
-            <p className="text-center text-gray-500 mt-4">
-              No reviews to analyze yet.
-            </p>
-          )}
-         </div>
-      )}
-
-      {response && (
-        <>
-          <h4 className="text-2xl font-bold mb-5 text-gray-700 border-b-2 border-blue-500 pb-2 inline-block mt-6">
-            🔴 Key Pain Points
-          </h4>
-          <ul className="list-disc list-inside space-y-3 text-gray-700">
-            {response["Key pain points"].map((data, index) => {
-              return <li key={index}>{data}</li>;
-            })}
-          </ul>
-
-          <h4 className="text-2xl font-bold mb-5 text-gray-700 border-b-2 border-blue-500 pb-2 inline-block mt-6">
-            🔵 Requests
-          </h4>
-          <ul className="list-disc list-inside space-y-3 text-gray-700">
-            {response["Requests"].map((data, index) => {
-              return <li key={index}>{data}</li>;
-            })}
-          </ul>
-
-          <h4 className="text-2xl font-bold mb-5 text-gray-700 border-b-2 border-blue-500 pb-2 inline-block mt-6">
-            🟢 Positive Feedback
-          </h4>
-          <ul className="list-disc list-inside space-y-3 text-gray-700">
-            {response["Positive Feedback"].map((data, index) => {
-              return <li key={index}>{data}</li>;
-            })}
-          </ul>
-
-          <h4 className="text-2xl font-bold mb-5 text-gray-700 border-b-2 border-blue-500 pb-2 inline-block mt-6">
-            Summary of Users
-          </h4>
-          <p className="space-y-3 text-gray-700">
-            {response["Summary of users"]}
-          </p>
-
-          <h4 className="text-2xl font-bold mb-5 text-gray-700 border-b-2 border-blue-500 pb-2 inline-block mt-6">
-            What PMs should prioritize
-          </h4>
-          <ul className="list-disc list-inside space-y-3 text-gray-700">
-            {response["PMs prioritize"].map((data, index) => {
-              return <li key={index}>{data}</li>;
-            })}
-          </ul>
-        </>
-      )}
-      </div>
-       : ""}
+        )}
     </div>
   );
 }

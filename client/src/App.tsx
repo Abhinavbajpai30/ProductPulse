@@ -37,9 +37,9 @@ function App() {
   const sampleAppIds = ["com.instagram.android", "com.ludo.king", "com.whatsapp", "com.application.zomato", "com.netflix.mediaclient", "com.duolingo", "com.truecaller", "com.pinterest", "in.startv.hotstar"]
 
   return (
-    <div className='flex items-center justify-center min-h-screen bg-gray-100 font-sans'>
-      <div className='bg-white p-6 md:p-8 rounded-lg shadow-md w-full max-w-lg mx-4'>
-        <img className="mx-auto my-4 w-40 object-contain rounded-lg" src="/logoMain.png"/>
+    <div className='flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 font-sans p-4'>
+      <div className='bg-white p-6 md:p-8 rounded-2xl shadow-lg w-full max-w-2xl mx-auto'>
+        <img className="mx-auto my-4 w-40 object-contain" src="/logoMain.png"/>
         <MainContext.Provider value={{jsonData, setJsonData, inputTextRef, inputFileRef, fileName, setFileName, error, setError, response, setResponse, isLoading, setIsLoading, sampleAppIds, appDetails, setAppDetails}}>
           <Form />
           <Reviews />

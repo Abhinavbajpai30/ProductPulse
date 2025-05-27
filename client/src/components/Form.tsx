@@ -131,22 +131,28 @@ function Form() {
 
   return (
     <>
-      <h2 className="text-2xl font-semibold mb-4 text-gray-700 text-center">
+      <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800">
         Play Store Review Analyzer
-      </h2>
+      </h1>
+      <p className="text-center text-gray-500 mt-2 mb-6">
+        Enter a Google Play Store App ID to get started.
+      </p>
 
-      <div className="mt-6">
+      <div className="flex items-center mt-6 shadow-md rounded-lg">
         <input
           ref={inputTextRef}
           type="text"
-          placeholder="Enter AppID"
-          className="w-85 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow shadow-sm"
+          placeholder="E.g., com.whatsapp"
+          className="w-full p-4 border-y border-l border-gray-200 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow"
         />
         <button
           disabled={isLoading}
           onClick={handleSubmit}
-          className="ml-3 w-20 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mb-1.5"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-6 rounded-r-lg transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 flex items-center"
         >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+          </svg>
           Search
         </button>
       </div>
