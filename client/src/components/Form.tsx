@@ -142,7 +142,7 @@ function Form() {
         <input
           ref={inputTextRef}
           type="text"
-          placeholder="E.g., com.whatsapp"
+          placeholder="E.g., com.whatsapp (or empty for random)"
           className="w-full p-4 border-y border-l border-gray-200 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow"
         />
         <button

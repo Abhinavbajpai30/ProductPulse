@@ -34,7 +34,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [appDetails, setAppDetails] = useState<{title: string, summary: string, icon: string} | null>(null);
 
-  const sampleAppIds = ["com.instagram.android", "com.ludo.king", "com.whatsapp", "com.application.zomato", "com.netflix.mediaclient", "com.duolingo", "com.truecaller", "com.pinterest", "in.startv.hotstar"]
+  const sampleAppIds = ["com.instagram.android", "com.ludo.king", "com.whatsapp", "com.application.zomato", "com.netflix.mediaclient", "com.truecaller", "com.pinterest", "in.startv.hotstar", "com.snapchat.android", "com.phonepe.app", "com.linkedin.android", "com.pubg.imobile", "com.flipkart.android", "com.grofers.customerapp"]
 
   return (
     <div className='flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 font-sans p-4'>
